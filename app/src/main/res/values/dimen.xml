@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="quiz_screen_left_border">16dp</dimen>
+    <dimen name="quiz_screen_right_border">24dp</dimen>
+    <dimen name="quiz_text_size">24sp</dimen>
+    <dimen name="radio_button_text_left_padding">16dp</dimen>
+    <dimen name="radio_button_bottom_margin">8dp</dimen>
+    <dimen name="app_bottom_margin">16dp</dimen>
+
+</resources>

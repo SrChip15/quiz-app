@@ -1,0 +1,98 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">Harry Potter Trivia</string>
+    <string name="start">start quiz</string>
+    <string name="landing_screen_text">Do you know all there is?</string>
+
+    <string name="question_1">Where do Harry’s aunt and uncle live?</string>
+    <string-array name="ChoicesQuestionOne">
+        <item>Little Whinging</item>
+        <item>Godrics Hollow</item>
+        <item>Hogsmeade</item>
+        <item>Little Hangleton</item>
+    </string-array>
+
+    <string name="question_2">How many points is the Golden snitch worth?</string>
+    <string-array name="ChoicesQuestionTwo">
+        <item>125</item>
+        <item>200</item>
+        <item>150</item>
+        <item>500</item>
+    </string-array>
+
+    <string name="question_3">Who is Ginny’s first boyfriend?</string>
+    <string-array name="ChoicesQuestionThree">
+        <item>Zacharias Smith</item>
+        <item>Michael Corner</item>
+        <item>Harry Potter</item>
+        <item>Neville Longbottom</item>
+    </string-array>
+
+    <string name="question_4">What is the name of the fountain inside the ministry of magic?</string>
+    <string-array name="ChoicesQuestionFour">
+        <item>Fountain of Radiance</item>
+        <item>Fountain of Eros</item>
+        <item>Fountain of Magical Brethren</item>
+        <item>Ravenclaw’s Fountain</item>
+    </string-array>
+
+    <string name="question_5">What does Voldemort do to Neville when Neville refuses to join him?</string>
+    <string-array name="ChoicesQuestionFive">
+        <item>Makes Nagini attack him</item>
+        <item>Makes him wear the sorting hat and sets it on fire</item>
+        <item>Uses "Avada Kedavra” killing curse on him</item>
+        <item>Uses the cruciatus curse and tortures him</item>
+    </string-array>
+
+    <string name="question_6">Whose mother was Rowena Ravenclaw?</string>
+    <string-array name="ChoicesQuestionSix">
+        <item>Helga Hufflepuff</item>
+        <item>Minerva McGonagall</item>
+        <item>Elladora Ketteridge</item>
+        <item>The Grey Lady</item>
+    </string-array>
+
+    <string name="question_7">What is the name of the metamorphamagus that we know from the books?</string>
+    <string-array name="ChoicesQuestionSeven">
+        <item>Sirius Black</item>
+        <item>Nymphadora Tonks</item>
+        <item>Remus Lupin</item>
+        <item>Luna Lovegood</item>
+    </string-array>
+
+    <string name="question_8">Albus Dumbledore became famous for single-handedly killing which dark wizard?</string>
+    <string-array name="ChoicesQuestionEight">
+        <item>Barty Crouch Jr</item>
+        <item>Bellatrix Lestrange</item>
+        <item>Igor Karkaroff</item>
+        <item>Gellert Grindelwald</item>
+    </string-array>
+
+    <string name="question_9">What is the charm that Harry Potter uses to get his broom in the first
+    Triwizards Tournament Challenge to tackle the Dragon and get the egg?</string>
+
+    <string name="question_10">From the following, check the boxes for the three unforgivable curses?</string>
+    <string name="checkbox_1">Anapneo</string>
+    <string name="checkbox_2">Avada Kedavra</string>
+    <string name="checkbox_3">Anteoculatia</string>
+    <string name="checkbox_4">Crucio</string>
+    <string name="checkbox_5">Imperio</string>
+    <string name="checkbox_6">Alarte Ascendare</string>
+
+    <string name="next">next</string>
+    <string name="submit">submit</string>
+    <string name="finish">finish</string>
+
+    <string name="average">You got <xliff:g example="8" id="correct_answers">%d</xliff:g>
+    out of <xliff:g example="8" id="total_correct_answers">%d</xliff:g> answers correct!
+        \nWith a few pre-school courses you may be ready to apply to Hogwarts</string>
+
+    <string name="above_average">You got <xliff:g example="8" id="correct_answers">%d</xliff:g>
+    out of <xliff:g example="8" id="total_correct_answers">%d</xliff:g> answers correct!
+        \nYou have done well for a Muggle, Hogwarts is only nine and a three quarter steps away</string>
+
+    <string name="perfect_score">Perfect Score!
+        \nImpossible for a Muggle.\nGet out of here wizard. Very funny!</string>
+
+    <string name="play_again">play again?</string>
+
+</resources>
