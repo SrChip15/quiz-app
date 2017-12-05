@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.android.quizapp.MainActivity"
-    tools:ignore="RtlSymmetry">
+    tools:ignore="ContentDescription, RtlSymmetry">
 
     <ImageView
         android:id="@+id/banner_image"
@@ -14,14 +14,14 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:scaleType="centerCrop"
-        android:src="@drawable/hogwarts_landing_image"
-        tools:ignore="ContentDescription"/>
+        android:src="@drawable/hogwarts_landing_image"/>
 
     <TextView
         android:id="@+id/banner_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
+        android:fontFamily="casual"
         android:gravity="center"
         android:text="@string/landing_screen_text"
         android:textColor="@android:color/black"
@@ -33,7 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/app_bottom_margin"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:fontFamily="sans-serif-black"
         android:onClick="startQuiz"
         android:text="@string/start"
         android:textColor="@android:color/white"/>
@@ -55,12 +56,9 @@
                 android:layout_height="200dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:layout_marginTop="24dp"
-                android:visibility="gone"
-                tools:ignore="ContentDescription"/>
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/question_text_view"
@@ -68,12 +66,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
+                android:fontFamily="sans-serif-light"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/quiz_text_size"
-                android:typeface="serif"
                 android:visibility="gone"/>
 
             <RadioGroup
@@ -90,10 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/radio_button_bottom_margin"
                     android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                    android:layout_marginRight="@dimen/quiz_screen_right_border"
                     android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingLeft="@dimen/radio_button_text_left_padding"
                     android:paddingStart="@dimen/radio_button_text_left_padding"
                     android:textAppearance="@style/ChoicesText"
                     android:textSize="@dimen/quiz_text_size"/>
@@ -104,10 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/radio_button_bottom_margin"
                     android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                    android:layout_marginRight="@dimen/quiz_screen_right_border"
                     android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingLeft="@dimen/radio_button_text_left_padding"
                     android:paddingStart="@dimen/radio_button_text_left_padding"
                     android:textAppearance="@style/ChoicesText"
                     android:textSize="@dimen/quiz_text_size"/>
@@ -118,10 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/radio_button_bottom_margin"
                     android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                    android:layout_marginRight="@dimen/quiz_screen_right_border"
                     android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingLeft="@dimen/radio_button_text_left_padding"
                     android:paddingStart="@dimen/radio_button_text_left_padding"
                     android:textAppearance="@style/ChoicesText"
                     android:textSize="@dimen/quiz_text_size"/>
@@ -132,10 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/radio_button_bottom_margin"
                     android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                    android:layout_marginRight="@dimen/quiz_screen_right_border"
                     android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingLeft="@dimen/radio_button_text_left_padding"
                     android:paddingStart="@dimen/radio_button_text_left_padding"
                     android:textAppearance="@style/ChoicesText"
                     android:textSize="@dimen/quiz_text_size"/>
@@ -218,10 +202,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:background="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
                 android:onClick="onSubmitClick"
                 android:text="@string/submit"
                 android:textAppearance="@style/ButtonText"
@@ -233,10 +215,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:background="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
                 android:onClick="nextButton"
                 android:text="@string/next"
                 android:textAppearance="@style/ButtonText"
@@ -247,10 +227,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:background="@color/colorAccent"
+                android:backgroundTint="@color/colorAccent"
                 android:onClick="onPlayAgainClick"
                 android:text="@string/play_again"
                 android:textAppearance="@style/ButtonText"
