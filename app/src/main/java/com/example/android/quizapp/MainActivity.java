@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -61,25 +62,25 @@ public class MainActivity extends AppCompatActivity {
         scrollView.setVisibility(View.VISIBLE);
 
         // Set first question hint image
-        ImageView questionOneImage = (ImageView) findViewById(R.id.hint_image_view);
+        ImageView questionOneImage = findViewById(R.id.hint_image_view);
         questionOneImage.setImageResource(R.drawable.question_one_hint_image);
         questionOneImage.setVisibility(View.VISIBLE);
 
         // Make question TextView visible and Set first question
-        TextView questionView = (TextView) findViewById(R.id.question_text_view);
+        TextView questionView = findViewById(R.id.question_text_view);
         questionView.setText(R.string.question_1);
         questionView.setGravity(Gravity.NO_GRAVITY);
         questionView.setVisibility(View.VISIBLE);
 
         // Set multiple choices
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
         Resources res = getResources();
         String[] getChoices = res.getStringArray(R.array.ChoicesQuestionOne);
         setRadioButtonText(getChoices);
         radioGroup.setVisibility(View.VISIBLE);
 
         // Set submit button
-        Button submitButton = (Button) findViewById(R.id.submit_button);
+        Button submitButton = findViewById(R.id.submit_button);
         submitButton.setText(R.string.submit);
         submitButton.setVisibility(View.VISIBLE);
 
@@ -91,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void nextButton(View v) {
         // Get necessary views
-        ImageView nextQuestionImage = (ImageView) findViewById(R.id.hint_image_view);
-        TextView questionTextView = (TextView) findViewById(R.id.question_text_view);
-        Button getSubmitButton = (Button) findViewById(R.id.submit_button);
+        ImageView nextQuestionImage = findViewById(R.id.hint_image_view);
+        TextView questionTextView = findViewById(R.id.question_text_view);
+        Button getSubmitButton = findViewById(R.id.submit_button);
         head++;
 
         if (head < answerKey.length) {
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         getSubmitButton.setVisibility(View.VISIBLE);
 
         // Remove next button
-        Button nextButton = (Button) findViewById(R.id.next_button);
+        Button nextButton = findViewById(R.id.next_button);
         nextButton.setVisibility(View.GONE);
     }
 
@@ -198,16 +199,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onSubmitClick(View v) {
         // Select RadioGroup and EditText view
-        RadioGroup radioGroupView = (RadioGroup) findViewById(R.id.radio_group);
-        EditText editTextView = (EditText) findViewById(R.id.user_input_edittext_view);
-        Button submitButtonView = (Button) findViewById(R.id.submit_button);
+        RadioGroup radioGroupView = findViewById(R.id.radio_group);
+        EditText editTextView = findViewById(R.id.user_input_edittext_view);
+        Button submitButtonView = findViewById(R.id.submit_button);
 
         // Check question type to appropriately evaluate answer
         if (radioGroupView.getVisibility() == View.VISIBLE) {
             // Multiple-choice question is displayed to user
             // Get the ID of the checked RadioButton from RadioGroup view
             int checkedRadioButtonId = radioGroupView.getCheckedRadioButtonId();
-            RadioButton checkedRadioButton = (RadioButton) findViewById(checkedRadioButtonId);
+            RadioButton checkedRadioButton = findViewById(checkedRadioButtonId);
             if (checkedRadioButtonId == -1) {
                 // None of the radio buttons were checked
                 displayToastForResult("Please check one of the options!");
@@ -230,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 submitButtonView.setVisibility(View.GONE);
 
                 // Make nextButton visible
-                Button nextButton = (Button) findViewById(R.id.next_button);
+                Button nextButton = findViewById(R.id.next_button);
                 nextButton.setVisibility(View.VISIBLE);
             }
         } else if (editTextView.getVisibility() == View.VISIBLE) {
@@ -245,13 +246,17 @@ public class MainActivity extends AppCompatActivity {
                 displayToastForResult("Incorrect");
             }
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            } else {
+                Log.d("MainActivity", "Soft keyboard not present");
+            }
 
             // Remove Submit button
             submitButtonView.setVisibility(View.GONE);
 
             // Make nextButton visible
-            Button nextButton = (Button) findViewById(R.id.next_button);
+            Button nextButton = findViewById(R.id.next_button);
             nextButton.setVisibility(View.VISIBLE);
         } else {
             // Multiple CheckBox question type is displayed to user
@@ -270,11 +275,11 @@ public class MainActivity extends AppCompatActivity {
                 // Setup summary screen
 
                 // Set summary image view
-                ImageView summaryImageView = (ImageView) findViewById(R.id.hint_image_view);
+                ImageView summaryImageView = findViewById(R.id.hint_image_view);
                 summaryImageView.setImageResource(R.drawable.summary_image_hogwarts_logo);
 
                 // Set result text view
-                TextView resultTextView = (TextView) findViewById(R.id.question_text_view);
+                TextView resultTextView = findViewById(R.id.question_text_view);
                 int totalNumberOfQuestions = 10;
                 float percentageOfCorrectAnswers = numberOfCorrectAnswers / (float) totalNumberOfQuestions;
                 if (percentageOfCorrectAnswers < 0.75) {
@@ -351,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
      * @param choices a String array that holds the multiple choices for a question
      */
     private void setRadioButtonText(String[] choices) {
-        RadioGroup radioGroupView = (RadioGroup) findViewById(R.id.radio_group);
+        RadioGroup radioGroupView = findViewById(R.id.radio_group);
         // Clear prior selections
         radioGroupView.clearCheck();
         // Set multiple choices
@@ -418,6 +423,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param makeVisible a boolean that indicates whether or not the CheckBox is to be made visible
      */
+    @SuppressWarnings("unused")
     private void isCheckboxVisible(View v, boolean makeVisible) {
         // Get individual CheckBox view from CheckBox cluster
         View checkBox1View = findViewById(R.id.checkbox_option_1);
@@ -451,13 +457,14 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param isChecked a boolean indicating the checked status of a CheckBox view
      */
+    @SuppressWarnings({ "SameParameterValue", "unused", "ConstantConditions" })
     private void clearCheckedBoxGroup(View v, boolean isChecked) {
-        CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkbox_option_1);
-        CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkbox_option_2);
-        CheckBox checkBox3 = (CheckBox) findViewById(R.id.checkbox_option_3);
-        CheckBox checkBox4 = (CheckBox) findViewById(R.id.checkbox_option_4);
-        CheckBox checkBox5 = (CheckBox) findViewById(R.id.checkbox_option_5);
-        CheckBox checkBox6 = (CheckBox) findViewById(R.id.checkbox_option_6);
+        CheckBox checkBox1 = findViewById(R.id.checkbox_option_1);
+        CheckBox checkBox2 = findViewById(R.id.checkbox_option_2);
+        CheckBox checkBox3 = findViewById(R.id.checkbox_option_3);
+        CheckBox checkBox4 = findViewById(R.id.checkbox_option_4);
+        CheckBox checkBox5 = findViewById(R.id.checkbox_option_5);
+        CheckBox checkBox6 = findViewById(R.id.checkbox_option_6);
 
         if (isChecked) {
             checkBox1.setChecked(!isChecked);
