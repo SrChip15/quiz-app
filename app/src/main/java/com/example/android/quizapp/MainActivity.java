@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private int head = 0;
     private int numberOfCorrectAnswers = 0;
-    private String[] answerKey = {"Little Whinging", "150", "Michael Corner", "Fountain of Magical Brethren",
+    public static final String[] answerKey = {"Little Whinging", "150", "Michael Corner", "Fountain of Magical Brethren",
             "Makes him wear the sorting hat and sets it on fire", "The Grey Lady", "Nymphadora Tonks",
             "Gellert Grindelwald", "Accio"};
     private String trackAnswers = "";
