@@ -17,6 +17,9 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class FirstQuestionAnswerTest {
+
+	private final String ANSWER = MainActivity.answerKey[0];
+
 	@Rule
 	public ActivityTestRule<MainActivity> mActivityTestRule =
 			new ActivityTestRule<>(MainActivity.class);
@@ -26,30 +29,30 @@ public class FirstQuestionAnswerTest {
 		onView(withId(R.id.start_button)).perform(click()); // Start the quiz
 		onView(withId(R.id.radio_first)).perform(click()); // Check radio box
 		onView(withId(R.id.radio_first)).check(matches(isChecked())); // Ensure box is checked
-		onView(withId(R.id.radio_first)).check(matches(withText(MainActivity.answerKey[0])));
+		onView(withId(R.id.radio_first)).check(matches(withText(ANSWER))); // Check answer
 	}
 
 	@Test
 	public void clickSecondOption_CheckCorrectAnswer() {
-		onView(withId(R.id.start_button)).perform(click()); // Start the quiz
-		onView(withId(R.id.radio_second)).perform(click()); // Check radio box
-		onView(withId(R.id.radio_second)).check(matches(isChecked())); // Ensure box is checked
-		onView(withId(R.id.radio_second)).check(matches(not(withText(MainActivity.answerKey[0]))));
+		onView(withId(R.id.start_button)).perform(click());
+		onView(withId(R.id.radio_second)).perform(click());
+		onView(withId(R.id.radio_second)).check(matches(isChecked()));
+		onView(withId(R.id.radio_second)).check(matches(not(withText(ANSWER))));
 	}
 
 	@Test
 	public void clickThirdOption_CheckCorrectAnswer() {
-		onView(withId(R.id.start_button)).perform(click()); // Start the quiz
-		onView(withId(R.id.radio_third)).perform(click()); // Check radio box
-		onView(withId(R.id.radio_third)).check(matches(isChecked())); // Ensure box is checked
-		onView(withId(R.id.radio_third)).check(matches(not(withText(MainActivity.answerKey[0]))));
+		onView(withId(R.id.start_button)).perform(click());
+		onView(withId(R.id.radio_third)).perform(click());
+		onView(withId(R.id.radio_third)).check(matches(isChecked()));
+		onView(withId(R.id.radio_third)).check(matches(not(withText(ANSWER))));
 	}
 
 	@Test
 	public void clickFourthOption_CheckCorrectAnswer() {
-		onView(withId(R.id.start_button)).perform(click()); // Start the quiz
-		onView(withId(R.id.radio_fourth)).perform(click()); // Check radio box
-		onView(withId(R.id.radio_fourth)).check(matches(isChecked())); // Ensure box is checked
-		onView(withId(R.id.radio_fourth)).check(matches(not(withText(MainActivity.answerKey[0]))));
+		onView(withId(R.id.start_button)).perform(click());
+		onView(withId(R.id.radio_fourth)).perform(click());
+		onView(withId(R.id.radio_fourth)).check(matches(isChecked()));
+		onView(withId(R.id.radio_fourth)).check(matches(not(withText(ANSWER))));
 	}
 }
