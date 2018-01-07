@@ -8,9 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ChoicesView">
+        <item name="android:layout_marginLeft">@dimen/quiz_screen_left_border</item>
+        <item name="android:layout_marginRight">@dimen/quiz_screen_right_border</item>
+        <item name="android:paddingLeft">@dimen/radio_button_text_padding</item>
+    </style>
+
     <style name="ChoicesText" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:typeface">serif</item>
+        <item name="android:textSize">@dimen/quiz_text_size</item>
     </style>
 
     <style name="ButtonText" parent="@android:style/TextAppearance">

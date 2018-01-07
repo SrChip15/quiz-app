@@ -8,6 +8,7 @@
     tools:context="com.example.android.quizapp.MainActivity"
     tools:ignore="ContentDescription, RtlSymmetry">
 
+    <!-- Splash screen page -->
     <ImageView
         android:id="@+id/banner_image"
         android:layout_width="match_parent"
@@ -21,11 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
         android:text="@string/landing_screen_text"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/quiz_text_size"/>
+        android:textSize="@dimen/banner_text_size"/>
 
     <Button
         android:id="@+id/start_button"
@@ -38,7 +39,9 @@
         android:onClick="startQuiz"
         android:text="@string/start"
         android:textColor="@android:color/white"/>
+    <!-- End of Splash Screen page -->
 
+    <!-- Question Page -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
@@ -53,25 +56,26 @@
             <ImageView
                 android:id="@+id/hint_image_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="24dp"
+                android:layout_height="180dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:visibility="gone"/>
 
+            <!-- Question Text -->
             <TextView
                 android:id="@+id/question_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:fontFamily="sans-serif-light"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/quiz_text_size"
+                android:textSize="@dimen/quiz_question_text_size"
                 android:visibility="gone"/>
 
+            <!-- Begin Multiple Choice questions  -->
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="wrap_content"
@@ -82,120 +86,111 @@
 
                 <RadioButton
                     android:id="@+id/radio_first"
+                    style="@style/ChoicesView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/radio_button_bottom_margin"
-                    android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingStart="@dimen/radio_button_text_left_padding"
-                    android:textAppearance="@style/ChoicesText"
-                    android:textSize="@dimen/quiz_text_size"/>
+                    android:layout_height="@dimen/choices_accessibility_size"
+                    android:textAppearance="@style/ChoicesText"/>
 
                 <RadioButton
                     android:id="@+id/radio_second"
+                    style="@style/ChoicesView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/radio_button_bottom_margin"
-                    android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingStart="@dimen/radio_button_text_left_padding"
-                    android:textAppearance="@style/ChoicesText"
-                    android:textSize="@dimen/quiz_text_size"/>
+                    android:layout_height="@dimen/choices_accessibility_size"
+                    android:textAppearance="@style/ChoicesText"/>
 
                 <RadioButton
                     android:id="@+id/radio_third"
+                    style="@style/ChoicesView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/radio_button_bottom_margin"
-                    android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingStart="@dimen/radio_button_text_left_padding"
-                    android:textAppearance="@style/ChoicesText"
-                    android:textSize="@dimen/quiz_text_size"/>
+                    android:layout_height="@dimen/choices_accessibility_size"
+                    android:textAppearance="@style/ChoicesText"/>
 
                 <RadioButton
                     android:id="@+id/radio_fourth"
+                    style="@style/ChoicesView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/radio_button_bottom_margin"
-                    android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                    android:layout_marginStart="@dimen/quiz_screen_left_border"
-                    android:paddingStart="@dimen/radio_button_text_left_padding"
-                    android:textAppearance="@style/ChoicesText"
-                    android:textSize="@dimen/quiz_text_size"/>
-
+                    android:layout_height="@dimen/choices_accessibility_size"
+                    android:textAppearance="@style/ChoicesText"/>
             </RadioGroup>
+            <!-- End of MCQ -->
 
+            <!-- 9th Question that requires user input -->
             <EditText
                 android:id="@+id/user_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_marginEnd="@dimen/quiz_screen_right_border"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:inputType="text"
                 android:maxLines="1"
                 android:visibility="gone"/>
+            <!-- End of 9th question -->
 
+            <!-- Begin CheckBox Question Type -->
             <CheckBox
                 android:id="@+id/checkbox_option_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_height="@dimen/choices_accessibility_size"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_1"
                 android:textAppearance="@style/ChoicesText"
-                android:textSize="@dimen/quiz_text_size"
                 android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/checkbox_option_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_height="@dimen/choices_accessibility_size"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_2"
-                android:textSize="@dimen/quiz_text_size"
+                android:textAppearance="@style/ChoicesText"
                 android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/checkbox_option_3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_height="@dimen/choices_accessibility_size"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_3"
-                android:textSize="@dimen/quiz_text_size"
+                android:textAppearance="@style/ChoicesText"
                 android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/checkbox_option_4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_height="@dimen/choices_accessibility_size"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_4"
-                android:textSize="@dimen/quiz_text_size"
+                android:textAppearance="@style/ChoicesText"
                 android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/checkbox_option_5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_height="@dimen/choices_accessibility_size"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_5"
-                android:textSize="@dimen/quiz_text_size"
+                android:textAppearance="@style/ChoicesText"
                 android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/checkbox_option_6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/choices_accessibility_size"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:onClick="onCheckboxClicked"
                 android:text="@string/checkbox_6"
-                android:textSize="@dimen/quiz_text_size"
+                android:textAppearance="@style/ChoicesText"
                 android:visibility="gone"/>
+            <!-- End of CheckBox Question type -->
 
+            <!-- Submit/Next Buttons -->
             <Button
                 android:id="@+id/submit_button"
                 android:layout_width="match_parent"
@@ -221,7 +216,9 @@
                 android:text="@string/next"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>
+            <!-- End of Submit/Next Buttons -->
 
+            <!-- Restart Quiz Button -->
             <Button
                 android:id="@+id/play_again_button"
                 android:layout_width="match_parent"
@@ -237,5 +234,6 @@
         </LinearLayout>
 
     </ScrollView>
+    <!-- End of questions page -->
 
 </LinearLayout>

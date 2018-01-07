@@ -114,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
 					setRadioButtonText(getChoicesQuestionTwo);
 					break;
 				case 2:
+					hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
 					hintImageForQuestion.setImageResource(R.drawable.question_three_hint_image);
 					questionText.setText(R.string.question_3);
 					String[] getChoicesQuestionThree = res.getStringArray(R.array.ChoicesQuestionThree);
 					setRadioButtonText(getChoicesQuestionThree);
 					break;
 				case 3:
+					hintImageForQuestion.setScaleType(ImageView.ScaleType.CENTER_CROP);
 					hintImageForQuestion.setImageResource(R.drawable.question_four_hint_image);
 					questionText.setText(R.string.question_4);
 					String[] getChoicesQuestionFour = res.getStringArray(R.array.ChoicesQuestionFour);
@@ -164,12 +166,12 @@ public class MainActivity extends AppCompatActivity {
 					break;
 			}
 		} else {
-			// Not multiple-choices nor EditText question type - Multiple CheckBox question type
-			// Remove EditText view
+			// Remove MCQ  and EditText view
 			ninthQuestionInput.setText("");
 			ninthQuestionInput.setVisibility(View.GONE);
 
 			// Make hint image visible and set hint image view
+			hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			hintImageForQuestion.setImageResource(R.drawable.question_ten_hint_image);
 
 			// Set question 10 text to question TextView
@@ -263,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 
 				// Set summary image view
+				hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				hintImageForQuestion.setImageResource(R.drawable.summary_image_hogwarts_logo);
 
 				// Set result text view
@@ -309,6 +312,11 @@ public class MainActivity extends AppCompatActivity {
 		// Remove play again button
 		View getPlayAgainButton = findViewById(R.id.play_again_button);
 		getPlayAgainButton.setVisibility(View.GONE);
+
+		// Clear checkbox again
+		clearCheckedBoxGroup(v, true);
+		// Set Scale type to app default
+		hintImageForQuestion.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 		// Set global variables to default
 		head = 0;
