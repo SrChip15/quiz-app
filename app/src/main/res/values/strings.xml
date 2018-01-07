@@ -94,5 +94,6 @@
         \nImpossible for a Muggle.\nGet out of here wizard. Very funny!</string>
 
     <string name="play_again">play again?</string>
+    <string name="spell_name">Name of the spell</string>
 
 </resources>

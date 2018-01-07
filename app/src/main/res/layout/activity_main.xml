@@ -143,10 +143,11 @@
             </RadioGroup>
 
             <EditText
-                android:id="@+id/user_input_edittext_view"
+                android:id="@+id/user_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/app_bottom_margin"
+                android:hint="@string/spell_name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:visibility="gone"/>

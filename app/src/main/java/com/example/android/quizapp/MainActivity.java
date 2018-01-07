@@ -20,29 +20,36 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * Class instance variables for storing and grading the answers to the quiz questions
-     */
+    /** Class instance variables for storing and grading the answers to the quiz questions */
     private int head = 0;
     private int numberOfCorrectAnswers = 0;
-    public static final String[] answerKey = {"Little Whinging", "150", "Michael Corner", "Fountain of Magical Brethren",
+	private String trackAnswers = "";
+	private ImageView hintImageForQuestion;
+    private TextView questionText;
+    private RadioGroup answerChoicesGroup;
+    private Button submitButton;
+    private Button nextButton;
+    private EditText ninthQuestionInput;
+
+	public static final String[] answerKey = {"Little Whinging", "150", "Michael Corner", "Fountain of Magical Brethren",
             "Makes him wear the sorting hat and sets it on fire", "The Grey Lady", "Nymphadora Tonks",
             "Gellert Grindelwald", "Accio"};
-    private String trackAnswers = "";
 
-
-    /**
-     * Parses resources and inflates default layout
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Setup globals
+        hintImageForQuestion = findViewById(R.id.hint_image_view);
+        questionText = findViewById(R.id.question_text_view);
+        answerChoicesGroup = findViewById(R.id.radio_group);
+        submitButton = findViewById(R.id.submit_button);
+        nextButton = findViewById(R.id.next_button);
+        ninthQuestionInput = findViewById(R.id.user_input);
     }
 
-    /**
-     * This method is called when the start quiz button is clicked by an user
-     */
+    /** This method is called when the start quiz button is clicked by an user */
     public void startQuiz(View v) {
 
         // Remove banner image
@@ -62,28 +69,23 @@ public class MainActivity extends AppCompatActivity {
         scrollView.setVisibility(View.VISIBLE);
 
         // Set first question hint image
-        ImageView questionOneImage = findViewById(R.id.hint_image_view);
-        questionOneImage.setImageResource(R.drawable.question_one_hint_image);
-        questionOneImage.setVisibility(View.VISIBLE);
+        hintImageForQuestion.setImageResource(R.drawable.question_one_hint_image);
+        hintImageForQuestion.setVisibility(View.VISIBLE);
 
         // Make question TextView visible and Set first question
-        TextView questionView = findViewById(R.id.question_text_view);
-        questionView.setText(R.string.question_1);
-        questionView.setGravity(Gravity.NO_GRAVITY);
-        questionView.setVisibility(View.VISIBLE);
+        questionText.setText(R.string.question_1);
+        questionText.setGravity(Gravity.NO_GRAVITY);
+        questionText.setVisibility(View.VISIBLE);
 
         // Set multiple choices
-        RadioGroup radioGroup = findViewById(R.id.radio_group);
         Resources res = getResources();
         String[] getChoices = res.getStringArray(R.array.ChoicesQuestionOne);
         setRadioButtonText(getChoices);
-        radioGroup.setVisibility(View.VISIBLE);
+        answerChoicesGroup.setVisibility(View.VISIBLE);
 
         // Set submit button
-        Button submitButton = findViewById(R.id.submit_button);
         submitButton.setText(R.string.submit);
         submitButton.setVisibility(View.VISIBLE);
-
     }
 
     /**
@@ -92,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void nextButton(View v) {
         // Get necessary views
-        ImageView nextQuestionImage = findViewById(R.id.hint_image_view);
-        TextView questionTextView = findViewById(R.id.question_text_view);
-        Button getSubmitButton = findViewById(R.id.submit_button);
         head++;
 
         if (head < answerKey.length) {
@@ -110,87 +109,84 @@ public class MainActivity extends AppCompatActivity {
                 // Set radio group appropriate choices
                 // Make submit button visible
                 case 1:
-                    nextQuestionImage.setImageResource(R.drawable.question_two_hint_image);
-                    questionTextView.setText(R.string.question_2);
+                    hintImageForQuestion.setImageResource(R.drawable.question_two_hint_image);
+                    questionText.setText(R.string.question_2);
                     String[] getChoicesQuestionTwo = res.getStringArray(R.array.ChoicesQuestionTwo);
                     setRadioButtonText(getChoicesQuestionTwo);
                     break;
                 case 2:
-                    nextQuestionImage.setImageResource(R.drawable.question_three_hint_image);
-                    questionTextView.setText(R.string.question_3);
+                    hintImageForQuestion.setImageResource(R.drawable.question_three_hint_image);
+                    questionText.setText(R.string.question_3);
                     String[] getChoicesQuestionThree = res.getStringArray(R.array.ChoicesQuestionThree);
                     setRadioButtonText(getChoicesQuestionThree);
                     break;
                 case 3:
-                    nextQuestionImage.setImageResource(R.drawable.question_four_hint_image);
-                    questionTextView.setText(R.string.question_4);
+                    hintImageForQuestion.setImageResource(R.drawable.question_four_hint_image);
+                    questionText.setText(R.string.question_4);
                     String[] getChoicesQuestionFour = res.getStringArray(R.array.ChoicesQuestionFour);
                     setRadioButtonText(getChoicesQuestionFour);
                     break;
                 case 4:
-                    nextQuestionImage.setImageResource(R.drawable.question_five_hint_image);
-                    questionTextView.setText(R.string.question_5);
+                    hintImageForQuestion.setImageResource(R.drawable.question_five_hint_image);
+                    questionText.setText(R.string.question_5);
                     String[] getChoicesQuestionFive = res.getStringArray(R.array.ChoicesQuestionFive);
                     setRadioButtonText(getChoicesQuestionFive);
                     break;
                 case 5:
-                    nextQuestionImage.setImageResource(R.drawable.question_six_hint_image);
-                    questionTextView.setText(R.string.question_6);
+                    hintImageForQuestion.setImageResource(R.drawable.question_six_hint_image);
+                    questionText.setText(R.string.question_6);
                     String[] getChoicesQuestionSix = res.getStringArray(R.array.ChoicesQuestionSix);
                     setRadioButtonText(getChoicesQuestionSix);
                     break;
                 case 6:
-                    nextQuestionImage.setImageResource(R.drawable.question_seven_hint_image);
-                    questionTextView.setText(R.string.question_7);
+                    hintImageForQuestion.setImageResource(R.drawable.question_seven_hint_image);
+                    questionText.setText(R.string.question_7);
                     String[] getChoicesQuestionSeven = res.getStringArray(R.array.ChoicesQuestionSeven);
                     setRadioButtonText(getChoicesQuestionSeven);
                     break;
                 case 7:
-                    nextQuestionImage.setImageResource(R.drawable.question_eight_hint_image);
-                    questionTextView.setText(R.string.question_8);
+                    hintImageForQuestion.setImageResource(R.drawable.question_eight_hint_image);
+                    questionText.setText(R.string.question_8);
                     String[] getChoicesQuestionEight = res.getStringArray(R.array.ChoicesQuestionEight);
                     setRadioButtonText(getChoicesQuestionEight);
                     break;
                 case 8:
                     // Edit Text question type. Remove RadioGroup view
-                    View radioGroupView = findViewById(R.id.radio_group);
-                    radioGroupView.setVisibility(View.GONE);
+                    answerChoicesGroup.setVisibility(View.GONE);
 
                     // Set the hint image
-                    nextQuestionImage.setImageResource(R.drawable.question_nine_hint_image);
+                    hintImageForQuestion.setImageResource(R.drawable.question_nine_hint_image);
 
                     // Set the text view for question
-                    questionTextView.setText(R.string.question_9);
+                    questionText.setText(R.string.question_9);
 
                     // Make EditTextView visible
-                    View editTextView = findViewById(R.id.user_input_edittext_view);
-                    editTextView.setVisibility(View.VISIBLE);
+                    ninthQuestionInput.setVisibility(View.VISIBLE);
                     break;
             }
         } else {
             // Not multiple-choices nor EditText question type - Multiple CheckBox question type
             // Remove EditText view
-            View editTextView = findViewById(R.id.user_input_edittext_view);
-            editTextView.setVisibility(View.GONE);
+	        ninthQuestionInput.setText("");
+            ninthQuestionInput.setVisibility(View.GONE);
 
             // Make hint image visible and set hint image view
-            nextQuestionImage.setImageResource(R.drawable.question_ten_hint_image);
+            hintImageForQuestion.setImageResource(R.drawable.question_ten_hint_image);
 
             // Set question 10 text to question TextView
-            questionTextView.setText(R.string.question_10);
+            questionText.setText(R.string.question_10);
 
             // Make all CheckBox options visible
             isCheckboxVisible(v, true);
 
             // Set submit button text to finish
-            getSubmitButton.setText(R.string.finish);
+            submitButton.setText(R.string.finish);
         }
 
         // Make submit button visible
-        getSubmitButton.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.VISIBLE);
 
         // Remove next button
-        Button nextButton = findViewById(R.id.next_button);
         nextButton.setVisibility(View.GONE);
     }
 
@@ -198,16 +194,11 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when an user clicks the submit button to submits his/her answer to a question
      */
     public void onSubmitClick(View v) {
-        // Select RadioGroup and EditText view
-        RadioGroup radioGroupView = findViewById(R.id.radio_group);
-        EditText editTextView = findViewById(R.id.user_input_edittext_view);
-        Button submitButtonView = findViewById(R.id.submit_button);
-
         // Check question type to appropriately evaluate answer
-        if (radioGroupView.getVisibility() == View.VISIBLE) {
+        if (answerChoicesGroup.getVisibility() == View.VISIBLE) {
             // Multiple-choice question is displayed to user
             // Get the ID of the checked RadioButton from RadioGroup view
-            int checkedRadioButtonId = radioGroupView.getCheckedRadioButtonId();
+            int checkedRadioButtonId = answerChoicesGroup.getCheckedRadioButtonId();
             RadioButton checkedRadioButton = findViewById(checkedRadioButtonId);
             if (checkedRadioButtonId == -1) {
                 // None of the radio buttons were checked
@@ -228,15 +219,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // Remove Submit button
-                submitButtonView.setVisibility(View.GONE);
+                submitButton.setVisibility(View.GONE);
 
                 // Make nextButton visible
-                Button nextButton = findViewById(R.id.next_button);
                 nextButton.setVisibility(View.VISIBLE);
             }
-        } else if (editTextView.getVisibility() == View.VISIBLE) {
+        } else if (ninthQuestionInput.getVisibility() == View.VISIBLE) {
             // EditText question type is displayed to user
-            String answerText = editTextView.getText().toString().toLowerCase();
+            String answerText = ninthQuestionInput.getText().toString().toLowerCase();
             if (answerText.equals(answerKey[head].toLowerCase())) {
                 numberOfCorrectAnswers++;
                 // Toast instant result
@@ -253,10 +243,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // Remove Submit button
-            submitButtonView.setVisibility(View.GONE);
+            submitButton.setVisibility(View.GONE);
 
             // Make nextButton visible
-            Button nextButton = findViewById(R.id.next_button);
             nextButton.setVisibility(View.VISIBLE);
         } else {
             // Multiple CheckBox question type is displayed to user
@@ -275,8 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 // Setup summary screen
 
                 // Set summary image view
-                ImageView summaryImageView = findViewById(R.id.hint_image_view);
-                summaryImageView.setImageResource(R.drawable.summary_image_hogwarts_logo);
+                hintImageForQuestion.setImageResource(R.drawable.summary_image_hogwarts_logo);
 
                 // Set result text view
                 TextView resultTextView = findViewById(R.id.question_text_view);
@@ -302,18 +290,17 @@ public class MainActivity extends AppCompatActivity {
                 getPlayAgainButton.setVisibility(View.VISIBLE);
 
                 // Set button text to finish
-                submitButtonView.setVisibility(View.GONE);
+                submitButton.setVisibility(View.GONE);
             }
         }
 
     }
 
-    /**
-     * This method is called when an user wants to play again
-     */
+    /** This method is called when an user wants to play again */
     public void onPlayAgainClick(View v) {
         // Reset app to new quiz
         // Remove scroll view
+        // TODO - Remove redirect to splash screen and redirect to first question
         View scrollView = findViewById(R.id.scroll_view);
         scrollView.setVisibility(View.GONE);
 
@@ -338,12 +325,10 @@ public class MainActivity extends AppCompatActivity {
         clearCheckedBoxGroup(v, true);
 
         // Remove hint image view
-        View summaryImageView = findViewById(R.id.hint_image_view);
-        summaryImageView.setVisibility(View.GONE);
+        hintImageForQuestion.setVisibility(View.GONE);
 
         // Remove question text view
-        View questionTextView = findViewById(R.id.question_text_view);
-        questionTextView.setVisibility(View.GONE);
+        questionText.setVisibility(View.GONE);
 
         // Remove play again button
         View getPlayAgainButton = findViewById(R.id.play_again_button);
@@ -356,12 +341,11 @@ public class MainActivity extends AppCompatActivity {
      * @param choices a String array that holds the multiple choices for a question
      */
     private void setRadioButtonText(String[] choices) {
-        RadioGroup radioGroupView = findViewById(R.id.radio_group);
         // Clear prior selections
-        radioGroupView.clearCheck();
+        answerChoicesGroup.clearCheck();
         // Set multiple choices
-        for (int i = 0; i < radioGroupView.getChildCount(); i++) {
-            ((RadioButton) radioGroupView.getChildAt(i)).setText(choices[i]);
+        for (int i = 0; i < answerChoicesGroup.getChildCount(); i++) {
+            ((RadioButton) answerChoicesGroup.getChildAt(i)).setText(choices[i]);
         }
     }
 
