@@ -28,8 +28,7 @@ public class SecondQuestionAnswerTest {
 	public void clickFirstOption_CheckCorrectAnswer() {
 		onView(withId(R.id.start_button)).perform(click()); // Start the quiz
 		onView(withId(R.id.radio_first)).perform(click()); // Check radio box
-		onView(withId(R.id.submit_button)).perform(click()); // first question submit
-		onView(withId(R.id.next_button)).perform(click()); // Move to second question
+		onView(withId(R.id.submit_button)).perform(click()); // first question submit & move to second
 		onView(withId(R.id.radio_first)).perform(click()); // Check radio box
 		onView(withId(R.id.radio_first)).check(matches(isChecked())); // Ensure box is checked
 		onView(withId(R.id.radio_first)).check(matches(not(withText(ANSWER)))); // wrong answer
@@ -40,7 +39,6 @@ public class SecondQuestionAnswerTest {
 		onView(withId(R.id.start_button)).perform(click());
 		onView(withId(R.id.radio_first)).perform(click());
 		onView(withId(R.id.submit_button)).perform(click());
-		onView(withId(R.id.next_button)).perform(click());
 		onView(withId(R.id.radio_second)).perform(click());
 		onView(withId(R.id.radio_second)).check(matches(isChecked()));
 		onView(withId(R.id.radio_second)).check(matches(not(withText(ANSWER))));
@@ -51,7 +49,6 @@ public class SecondQuestionAnswerTest {
 		onView(withId(R.id.start_button)).perform(click());
 		onView(withId(R.id.radio_first)).perform(click());
 		onView(withId(R.id.submit_button)).perform(click());
-		onView(withId(R.id.next_button)).perform(click());
 		onView(withId(R.id.radio_third)).perform(click());
 		onView(withId(R.id.radio_third)).check(matches(isChecked()));
 		onView(withId(R.id.radio_third)).check(matches(withText(ANSWER)));
@@ -62,7 +59,6 @@ public class SecondQuestionAnswerTest {
 		onView(withId(R.id.start_button)).perform(click());
 		onView(withId(R.id.radio_first)).perform(click());
 		onView(withId(R.id.submit_button)).perform(click());
-		onView(withId(R.id.next_button)).perform(click());
 		onView(withId(R.id.radio_fourth)).perform(click());
 		onView(withId(R.id.radio_fourth)).check(matches(isChecked()));
 		onView(withId(R.id.radio_fourth)).check(matches(not(withText(ANSWER))));
