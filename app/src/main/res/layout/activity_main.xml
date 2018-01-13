@@ -219,7 +219,7 @@
                 android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:background="@color/colorAccent"
-                android:onClick="onSubmitClick"
+                android:onClick="evaluateUserResponse1"
                 android:text="@string/submit"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>
@@ -234,7 +234,7 @@
                 android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:background="@color/colorAccent"
-                android:onClick="nextButton"
+                android:onClick="presentNextQuestion"
                 android:text="@string/next"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>

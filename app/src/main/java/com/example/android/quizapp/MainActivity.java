@@ -21,8 +21,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 	/** Class instance variables for storing and grading the answers to the quiz questions */
-	private int head = 0;
-	private int numberOfCorrectAnswers = 0;
+	private int head;
+	private int numberOfCorrectAnswers;
 	private String trackAnswers = "";
 	private ImageView hintImageForQuestion;
 	private TextView questionText;
@@ -31,9 +31,17 @@ public class MainActivity extends AppCompatActivity {
 	private Button nextButton;
 	private EditText ninthQuestionInput;
 
-	public static final String[] answerKey = { "Little Whinging", "150", "Michael Corner", "Fountain of Magical Brethren",
-			"Makes him wear the sorting hat and sets it on fire", "The Grey Lady", "Nymphadora Tonks",
-			"Gellert Grindelwald", "Accio" };
+	public static final String[] answerKey = {
+			"Little Whinging",
+			"150",
+			"Michael Corner",
+			"Fountain of Magical Brethren",
+			"Makes him wear the sorting hat and sets it on fire",
+			"The Grey Lady",
+			"Nymphadora Tonks",
+			"Gellert Grindelwald",
+			"Accio"
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 		View bannerTextView = findViewById(R.id.banner_text);
 		bannerTextView.setVisibility(View.GONE);
 
-		// Remove button
+		// Remove start quiz button
 		View startQuizButton = findViewById(R.id.start_button);
 		startQuizButton.setVisibility(View.GONE);
 
@@ -68,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 		scrollView.setVisibility(View.VISIBLE);
 
 		// Set first question hint image
+		head++;
 		hintImageForQuestion.setImageResource(R.drawable.question_one_hint_image);
 		hintImageForQuestion.setVisibility(View.VISIBLE);
 
@@ -91,81 +100,84 @@ public class MainActivity extends AppCompatActivity {
 	 * This method is called when an user clicks the next button
 	 * The button itself shows up only after the submit button is clicked
 	 */
-	public void nextButton(View v) {
-		// Get necessary views
-		head++;
-
-		if (head < answerKey.length) {
-			// Increment head by 1 for next question
-			// Set the screen for the next question
-			// Get resources to set multiple choice string-array
-			Resources res = getResources();
-
-			// Set screen corresponding to the next question
-			switch (head) {
+	public void presentNextQuestion(View v) {
+		Resources res = getResources();
+		answerChoicesGroup.clearCheck();
+		// Set screen corresponding to the next question - hint image, question,
+		// choices & submit button
+		switch (head) {
+			case 1:
+				hintImageForQuestion.setImageResource(R.drawable.question_two_hint_image);
+				questionText.setText(R.string.question_2);
+				String[] getChoicesQuestionTwo = res.getStringArray(R.array.ChoicesQuestionTwo);
+				setRadioButtonText(getChoicesQuestionTwo);
+				break;
+			case 2:
+				hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
+				hintImageForQuestion.setImageResource(R.drawable.question_three_hint_image);
+				questionText.setText(R.string.question_3);
+				String[] getChoicesQuestionThree = res.getStringArray(R.array.ChoicesQuestionThree);
+				setRadioButtonText(getChoicesQuestionThree);
+				break;
+			case 3:
+				hintImageForQuestion.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				hintImageForQuestion.setImageResource(R.drawable.question_four_hint_image);
+				questionText.setText(R.string.question_4);
+				String[] getChoicesQuestionFour = res.getStringArray(R.array.ChoicesQuestionFour);
+				setRadioButtonText(getChoicesQuestionFour);
+				break;
+			case 4:
+				hintImageForQuestion.setImageResource(R.drawable.question_five_hint_image);
+				questionText.setText(R.string.question_5);
+				String[] getChoicesQuestionFive = res.getStringArray(R.array.ChoicesQuestionFive);
+				setRadioButtonText(getChoicesQuestionFive);
+				break;
+			case 5:
+				hintImageForQuestion.setImageResource(R.drawable.question_six_hint_image);
+				questionText.setText(R.string.question_6);
+				String[] getChoicesQuestionSix = res.getStringArray(R.array.ChoicesQuestionSix);
+				setRadioButtonText(getChoicesQuestionSix);
+				break;
+			case 6:
+				hintImageForQuestion.setImageResource(R.drawable.question_seven_hint_image);
+				questionText.setText(R.string.question_7);
+				String[] getChoicesQuestionSeven = res.getStringArray(R.array.ChoicesQuestionSeven);
+				setRadioButtonText(getChoicesQuestionSeven);
+				break;
+			case 7:
+				hintImageForQuestion.setImageResource(R.drawable.question_eight_hint_image);
+				questionText.setText(R.string.question_8);
+				String[] getChoicesQuestionEight = res.getStringArray(R.array.ChoicesQuestionEight);
+				setRadioButtonText(getChoicesQuestionEight);
+				break;
+			case 8:
+				// Edit Text question type. Remove RadioGroup view
+				answerChoicesGroup.setVisibility(View.GONE);
 				// Set the hint image
+				hintImageForQuestion.setImageResource(R.drawable.question_nine_hint_image);
 				// Set the text view for question
-				// Set radio group appropriate choices
-				// Make submit button visible
-				case 1:
-					hintImageForQuestion.setImageResource(R.drawable.question_two_hint_image);
-					questionText.setText(R.string.question_2);
-					String[] getChoicesQuestionTwo = res.getStringArray(R.array.ChoicesQuestionTwo);
-					setRadioButtonText(getChoicesQuestionTwo);
-					break;
-				case 2:
-					hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
-					hintImageForQuestion.setImageResource(R.drawable.question_three_hint_image);
-					questionText.setText(R.string.question_3);
-					String[] getChoicesQuestionThree = res.getStringArray(R.array.ChoicesQuestionThree);
-					setRadioButtonText(getChoicesQuestionThree);
-					break;
-				case 3:
-					hintImageForQuestion.setScaleType(ImageView.ScaleType.CENTER_CROP);
-					hintImageForQuestion.setImageResource(R.drawable.question_four_hint_image);
-					questionText.setText(R.string.question_4);
-					String[] getChoicesQuestionFour = res.getStringArray(R.array.ChoicesQuestionFour);
-					setRadioButtonText(getChoicesQuestionFour);
-					break;
-				case 4:
-					hintImageForQuestion.setImageResource(R.drawable.question_five_hint_image);
-					questionText.setText(R.string.question_5);
-					String[] getChoicesQuestionFive = res.getStringArray(R.array.ChoicesQuestionFive);
-					setRadioButtonText(getChoicesQuestionFive);
-					break;
-				case 5:
-					hintImageForQuestion.setImageResource(R.drawable.question_six_hint_image);
-					questionText.setText(R.string.question_6);
-					String[] getChoicesQuestionSix = res.getStringArray(R.array.ChoicesQuestionSix);
-					setRadioButtonText(getChoicesQuestionSix);
-					break;
-				case 6:
-					hintImageForQuestion.setImageResource(R.drawable.question_seven_hint_image);
-					questionText.setText(R.string.question_7);
-					String[] getChoicesQuestionSeven = res.getStringArray(R.array.ChoicesQuestionSeven);
-					setRadioButtonText(getChoicesQuestionSeven);
-					break;
-				case 7:
-					hintImageForQuestion.setImageResource(R.drawable.question_eight_hint_image);
-					questionText.setText(R.string.question_8);
-					String[] getChoicesQuestionEight = res.getStringArray(R.array.ChoicesQuestionEight);
-					setRadioButtonText(getChoicesQuestionEight);
-					break;
-				case 8:
-					// Edit Text question type. Remove RadioGroup view
-					answerChoicesGroup.setVisibility(View.GONE);
+				questionText.setText(R.string.question_9);
+				// Make EditTextView visible
+				ninthQuestionInput.setVisibility(View.VISIBLE);
+				break;
+			default:
+				// Question 10
+				// Remove MCQ and EditText view
+				ninthQuestionInput.setText("");
+				ninthQuestionInput.setVisibility(View.GONE);
 
-					// Set the hint image
-					hintImageForQuestion.setImageResource(R.drawable.question_nine_hint_image);
+				// Make hint image visible and set hint image view
+				hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
+				hintImageForQuestion.setImageResource(R.drawable.question_ten_hint_image);
 
-					// Set the text view for question
-					questionText.setText(R.string.question_9);
+				// Set question 10 text to question TextView
+				questionText.setText(R.string.question_10);
 
-					// Make EditTextView visible
-					ninthQuestionInput.setVisibility(View.VISIBLE);
-					break;
-			}
-		} else {
+				// Make all CheckBox options visible
+				isCheckboxVisible(v, true);
+				break;
+		}
+		/*else {
 			// Remove MCQ  and EditText view
 			ninthQuestionInput.setText("");
 			ninthQuestionInput.setVisibility(View.GONE);
@@ -188,123 +200,17 @@ public class MainActivity extends AppCompatActivity {
 		submitButton.setVisibility(View.VISIBLE);
 
 		// Remove next button
-		nextButton.setVisibility(View.GONE);
+		presentNextQuestion.setVisibility(View.GONE);*/
 	}
 
 	/**
-	 * This method is called when an user clicks the submit button to submits his/her answer to a question
+	 * This method is called when an user clicks the submit button to
+	 * submits his/her answer to a question
 	 */
-	public void onSubmitClick(View v) {
-		// Check question type to appropriately evaluate answer
-		if (answerChoicesGroup.getVisibility() == View.VISIBLE) {
-			// Multiple-choice question is displayed to user
-			// Get the ID of the checked RadioButton from RadioGroup view
-			int checkedRadioButtonId = answerChoicesGroup.getCheckedRadioButtonId();
-			RadioButton checkedRadioButton = findViewById(checkedRadioButtonId);
-			if (checkedRadioButtonId == -1) {
-				// None of the radio buttons were checked
-				displayToastForResult("Please check one of the options!");
-			} else {
-				// Get user answer from checked RadioButton
-				String userResponse = checkedRadioButton.getText().toString();
-				// Compare user answer with answerKey
-				boolean isCorrect = userResponse.equals(answerKey[head]);
-				if (isCorrect) {
-					// Increment correct answers by 1
-					numberOfCorrectAnswers++;
-					// Toast instant result
-					displayToastForResult("Correct!");
-				} else {
-					// Toast instant result
-					displayToastForResult("Incorrect");
-				}
-
-				// Remove Submit button
-				submitButton.setVisibility(View.GONE);
-
-				// Make nextButton visible
-				nextButton.setVisibility(View.VISIBLE);
-			}
-		} else if (ninthQuestionInput.getVisibility() == View.VISIBLE) {
-			// EditText question type is displayed to user
-			String answerText = ninthQuestionInput.getText().toString().toLowerCase();
-			if (answerText.equals(answerKey[head].toLowerCase())) {
-				numberOfCorrectAnswers++;
-				// Toast instant result
-				displayToastForResult("Correct");
-			} else {
-				// Toast instant result
-				displayToastForResult("Incorrect");
-			}
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			if (imm != null) {
-				imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-			} else {
-				Log.d("MainActivity", "Soft keyboard not present");
-			}
-
-			// Remove Submit button
-			submitButton.setVisibility(View.GONE);
-
-			// Make nextButton visible
-			nextButton.setVisibility(View.VISIBLE);
-		} else {
-			// Multiple CheckBox question type is displayed to user
-			if (trackAnswers.isEmpty()) {
-				displayToastForResult("Please check one or more of the options!");
-			} else {
-				if (trackAnswers.equals("ccc")) {
-					// Correct choices were checked
-					displayToastForResult("Correct");
-					numberOfCorrectAnswers++;
-				} else {
-					// Incorrect choices
-					displayToastForResult("Incorrect");
-					// Clear checked boxes when finish is clicked
-					clearCheckedBoxGroup(v, true);
-				}
-
-				// Set summary image view
-				hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
-				hintImageForQuestion.setImageResource(R.drawable.summary_image_hogwarts_logo);
-
-				// Set result text view
-				TextView resultTextView = findViewById(R.id.question_text_view);
-				int totalNumberOfQuestions = 10;
-				float percentageOfCorrectAnswers =
-						numberOfCorrectAnswers / (float) totalNumberOfQuestions;
-				if (percentageOfCorrectAnswers < 0.75) {
-					// Scores less than 75%
-					resultTextView.setText(getString(
-							R.string.average,
-							numberOfCorrectAnswers,
-							totalNumberOfQuestions
-					));
-				} else if (percentageOfCorrectAnswers < 1) {
-					// Scores between 75% and 99%
-					resultTextView.setText(getString(
-							R.string.above_average,
-							numberOfCorrectAnswers,
-							totalNumberOfQuestions
-					));
-				} else {
-					resultTextView.setText(R.string.perfect_score);
-				}
-				resultTextView.setGravity(Gravity.CENTER);
-				resultTextView.setTypeface(Typeface.SANS_SERIF);
-
-				// Remove multiple Checkboxes from view
-				isCheckboxVisible(v, false);
-
-				// Set play again button view
-				View getPlayAgainButton = findViewById(R.id.play_again_button);
-				getPlayAgainButton.setVisibility(View.VISIBLE);
-
-				// Set button text to finish
-				submitButton.setVisibility(View.GONE);
-			}
-		}
-
+	public void submitAndNext(View v) {
+		evaluateAnswer(v);
+		head++;
+		presentNextQuestion(v);
 	}
 
 	/** This method is called when an user wants to play again */
@@ -333,8 +239,6 @@ public class MainActivity extends AppCompatActivity {
 	 * @param choices a String array that holds the multiple choices for a question
 	 */
 	private void setRadioButtonText(String[] choices) {
-		// Clear prior selections
-		answerChoicesGroup.clearCheck();
 		// Set multiple choices
 		for (int i = 0; i < answerChoicesGroup.getChildCount(); i++) {
 			((RadioButton) answerChoicesGroup.getChildAt(i)).setText(choices[i]);
@@ -450,5 +354,91 @@ public class MainActivity extends AppCompatActivity {
 			checkBox5.setChecked(!isChecked);
 			checkBox6.setChecked(!isChecked);
 		}
+	}
+
+	private void evaluateAnswer(View view) {
+		// Check question type to appropriately evaluate answer
+		if (answerChoicesGroup.getVisibility() == View.VISIBLE) {
+			// Multiple-choice question is displayed to user
+			// Get the ID of the checked RadioButton from RadioGroup view
+			int checkedRadioButtonId = answerChoicesGroup.getCheckedRadioButtonId();
+			RadioButton checkedRadioButton = findViewById(checkedRadioButtonId);
+			if (checkedRadioButtonId == -1) {
+				// None of the radio buttons were checked
+				displayToastForResult("Please check one of the options!");
+			} else {
+				// Get user answer from checked RadioButton
+				String userResponse = checkedRadioButton.getText().toString();
+				// Compare user answer with answerKey
+				boolean isCorrect = userResponse.equals(answerKey[head]);
+				if (isCorrect) {
+					// Increment correct answers by 1
+					numberOfCorrectAnswers++;
+				}
+			}
+		} else if (ninthQuestionInput.getVisibility() == View.VISIBLE) {
+			// EditText question type is displayed to user
+			String answerText = ninthQuestionInput.getText().toString().toLowerCase();
+			if (answerText.equals(answerKey[head].toLowerCase())) {
+				numberOfCorrectAnswers++;
+			}
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			if (imm != null) {
+				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+			} else {
+				Log.d("MainActivity", "Soft keyboard not present");
+			}
+		} else {
+			// Multiple CheckBox question type is displayed to user
+			if (trackAnswers.isEmpty()) {
+				displayToastForResult("Please check one or more of the options!");
+			} else {
+				if (trackAnswers.equals("ccc")) {
+					numberOfCorrectAnswers++;
+				}
+
+				// Clear checked boxes when finish is clicked
+				clearCheckedBoxGroup(view, true);
+			}
+		}
+	}
+
+	private void showSummary(View view) {
+		// TODO
+		// Set summary image view
+		hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		hintImageForQuestion.setImageResource(R.drawable.summary_image_hogwarts_logo);
+
+		// Set result text view
+		TextView resultTextView = findViewById(R.id.question_text_view);
+		int totalNumberOfQuestions = 10;
+		float percentageOfCorrectAnswers =
+				numberOfCorrectAnswers / (float) totalNumberOfQuestions;
+		if (percentageOfCorrectAnswers < 0.75) {
+			// Scores less than 75%
+			resultTextView.setText(getString(
+					R.string.average,
+					numberOfCorrectAnswers,
+					totalNumberOfQuestions
+			));
+		} else if (percentageOfCorrectAnswers < 1) {
+			// Scores between 75% and 99%
+			resultTextView.setText(getString(
+					R.string.above_average,
+					numberOfCorrectAnswers,
+					totalNumberOfQuestions
+			));
+		} else {
+			resultTextView.setText(R.string.perfect_score);
+		}
+		resultTextView.setGravity(Gravity.CENTER);
+		resultTextView.setTypeface(Typeface.SANS_SERIF);
+
+		// Remove multiple Checkboxes from view
+		isCheckboxVisible(view, false);
+
+		// Set play again button view
+		View getPlayAgainButton = findViewById(R.id.play_again_button);
+		getPlayAgainButton.setVisibility(View.VISIBLE);
 	}
 }

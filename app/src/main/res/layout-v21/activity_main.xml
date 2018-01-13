@@ -58,10 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginBottom="8dp"
-                android:scaleType="centerCrop"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
                 android:visibility="gone"/>
 
             <!-- Question Text -->
@@ -199,7 +199,7 @@
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:backgroundTint="@color/colorAccent"
-                android:onClick="onSubmitClick"
+                android:onClick="submitAndNext"
                 android:text="@string/submit"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>
@@ -212,7 +212,7 @@
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:backgroundTint="@color/colorAccent"
-                android:onClick="nextButton"
+                android:onClick="presentNextQuestion"
                 android:text="@string/next"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>
