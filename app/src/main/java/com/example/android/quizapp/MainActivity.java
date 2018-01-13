@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 	private TextView questionText;
 	private RadioGroup answerChoicesGroup;
 	private Button submitButton;
-	private Button nextButton;
 	private EditText ninthQuestionInput;
 
 	public static final String[] answerKey = {
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 		questionText = findViewById(R.id.question_text_view);
 		answerChoicesGroup = findViewById(R.id.radio_group);
 		submitButton = findViewById(R.id.submit_button);
-		nextButton = findViewById(R.id.next_button);
 		ninthQuestionInput = findViewById(R.id.user_input);
 	}
 
@@ -76,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 		scrollView.setVisibility(View.VISIBLE);
 
 		// Set first question hint image
-		head++;
 		hintImageForQuestion.setImageResource(R.drawable.question_one_hint_image);
 		hintImageForQuestion.setVisibility(View.VISIBLE);
 
@@ -177,30 +175,6 @@ public class MainActivity extends AppCompatActivity {
 				isCheckboxVisible(v, true);
 				break;
 		}
-		/*else {
-			// Remove MCQ  and EditText view
-			ninthQuestionInput.setText("");
-			ninthQuestionInput.setVisibility(View.GONE);
-
-			// Make hint image visible and set hint image view
-			hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
-			hintImageForQuestion.setImageResource(R.drawable.question_ten_hint_image);
-
-			// Set question 10 text to question TextView
-			questionText.setText(R.string.question_10);
-
-			// Make all CheckBox options visible
-			isCheckboxVisible(v, true);
-
-			// Set submit button text to finish
-			submitButton.setText(R.string.finish);
-		}
-
-		// Make submit button visible
-		submitButton.setVisibility(View.VISIBLE);
-
-		// Remove next button
-		presentNextQuestion.setVisibility(View.GONE);*/
 	}
 
 	/**
@@ -208,9 +182,10 @@ public class MainActivity extends AppCompatActivity {
 	 * submits his/her answer to a question
 	 */
 	public void submitAndNext(View v) {
-		evaluateAnswer(v);
+		if (evaluateAnswer(v) == -1) return;
 		head++;
 		presentNextQuestion(v);
+		if (head == 10) showSummary(v);
 	}
 
 	/** This method is called when an user wants to play again */
@@ -356,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private void evaluateAnswer(View view) {
+	private int evaluateAnswer(View view) {
 		// Check question type to appropriately evaluate answer
 		if (answerChoicesGroup.getVisibility() == View.VISIBLE) {
 			// Multiple-choice question is displayed to user
@@ -366,6 +341,7 @@ public class MainActivity extends AppCompatActivity {
 			if (checkedRadioButtonId == -1) {
 				// None of the radio buttons were checked
 				displayToastForResult("Please check one of the options!");
+				return -1;
 			} else {
 				// Get user answer from checked RadioButton
 				String userResponse = checkedRadioButton.getText().toString();
@@ -375,10 +351,15 @@ public class MainActivity extends AppCompatActivity {
 					// Increment correct answers by 1
 					numberOfCorrectAnswers++;
 				}
+				return 0;
 			}
 		} else if (ninthQuestionInput.getVisibility() == View.VISIBLE) {
 			// EditText question type is displayed to user
 			String answerText = ninthQuestionInput.getText().toString().toLowerCase();
+			if (TextUtils.isEmpty(answerText)) {
+				displayToastForResult("Please enter text to proceed");
+				return -1;
+			}
 			if (answerText.equals(answerKey[head].toLowerCase())) {
 				numberOfCorrectAnswers++;
 			}
@@ -388,10 +369,12 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				Log.d("MainActivity", "Soft keyboard not present");
 			}
+			return 0;
 		} else {
 			// Multiple CheckBox question type is displayed to user
 			if (trackAnswers.isEmpty()) {
 				displayToastForResult("Please check one or more of the options!");
+				return -1;
 			} else {
 				if (trackAnswers.equals("ccc")) {
 					numberOfCorrectAnswers++;
@@ -399,12 +382,15 @@ public class MainActivity extends AppCompatActivity {
 
 				// Clear checked boxes when finish is clicked
 				clearCheckedBoxGroup(view, true);
+				return 0;
 			}
 		}
 	}
 
 	private void showSummary(View view) {
-		// TODO
+		// Hide submit
+		submitButton.setVisibility(View.INVISIBLE);
+
 		// Set summary image view
 		hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		hintImageForQuestion.setImageResource(R.drawable.summary_image_hogwarts_logo);

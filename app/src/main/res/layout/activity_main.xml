@@ -219,23 +219,8 @@
                 android:layout_marginRight="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
                 android:background="@color/colorAccent"
-                android:onClick="evaluateUserResponse1"
+                android:onClick="submitAndNext"
                 android:text="@string/submit"
-                android:textAppearance="@style/ButtonText"
-                android:visibility="gone"/>
-
-            <Button
-                android:id="@+id/next_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bottom_margin"
-                android:layout_marginEnd="@dimen/quiz_screen_right_border"
-                android:layout_marginLeft="@dimen/quiz_screen_left_border"
-                android:layout_marginRight="@dimen/quiz_screen_right_border"
-                android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:background="@color/colorAccent"
-                android:onClick="presentNextQuestion"
-                android:text="@string/next"
                 android:textAppearance="@style/ButtonText"
                 android:visibility="gone"/>
 
