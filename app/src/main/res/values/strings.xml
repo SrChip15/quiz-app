@@ -95,5 +95,6 @@
 
     <string name="play_again">play again?</string>
     <string name="spell_name">Name of the spell</string>
+    <string name="quiz_results">quiz results</string>
 
 </resources>

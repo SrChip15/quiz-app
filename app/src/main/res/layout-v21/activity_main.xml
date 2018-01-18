@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -206,18 +207,192 @@
                 android:visibility="gone"/>
             <!-- End of Submit Button -->
 
-            <!-- Restart Quiz Button -->
-            <Button
-                android:id="@+id/play_again_button"
+            <!-- Beginning of Quiz Results Page -->
+            <LinearLayout
+                android:id="@+id/quiz_results_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/quiz_screen_right_border"
                 android:layout_marginStart="@dimen/quiz_screen_left_border"
-                android:backgroundTint="@color/colorAccent"
-                android:onClick="onPlayAgainClick"
-                android:text="@string/play_again"
-                android:textAppearance="@style/ButtonText"
-                android:visibility="gone"/>
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/first_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_1"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_first_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/second_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_2"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_second_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/third_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_3"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_third_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/fourth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_4"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_fourth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/fifth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_5"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_fifth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/sixth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_6"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_sixth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/seventh_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_7"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_seventh_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/eighth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_8"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_eighth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/ninth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_9"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_ninth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+                <TextView
+                    android:id="@+id/tenth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/results_question_head_space"
+                    android:text="@string/question_10"
+                    android:textAppearance="@style/ResultsQuestionText"/>
+
+                <TextView
+                    android:id="@+id/answer_to_tenth_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/quiz_screen_right_border"
+                android:layout_marginStart="@dimen/quiz_screen_left_border"
+                android:layout_marginTop="@dimen/button_panel_head_space"
+                android:orientation="horizontal"
+                tools:ignore="ButtonStyle">
+
+                <!-- Quiz Results Button -->
+                <Button
+                    android:id="@+id/show_quiz_results"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorAccent"
+                    android:onClick="showQuizResults"
+                    android:text="@string/quiz_results"
+                    android:textAppearance="@style/ButtonText"
+                    android:visibility="gone"/>
+
+                <!-- Restart Quiz Button -->
+                <Button
+                    android:id="@+id/play_again_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorAccent"
+                    android:onClick="onPlayAgainClick"
+                    android:text="@string/play_again"
+                    android:textAppearance="@style/ButtonText"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

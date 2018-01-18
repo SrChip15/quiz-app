@@ -2,6 +2,7 @@ package com.example.android.quizapp;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
 	/** Class instance variables for storing and grading the answers to the quiz questions */
 	private int head;
 	private int numberOfCorrectAnswers;
-	private String trackAnswers = "";
 	private ImageView hintImageForQuestion;
 	private TextView questionText;
 	private RadioGroup answerChoicesGroup;
 	private Button submitButton;
 	private EditText ninthQuestionInput;
+	private String[] answerToTenthQuestion;
 
 	public static final String[] answerKey = {
 			"Little Whinging",
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 			"Accio"
 	};
 
+	private String[] userResponse = new String[9]; // ten answers incl multiple check box answer
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 		answerChoicesGroup = findViewById(R.id.radio_group);
 		submitButton = findViewById(R.id.submit_button);
 		ninthQuestionInput = findViewById(R.id.user_input);
+
+		answerToTenthQuestion = new String[6];
 	}
 
 	/** This method is called when the start quiz button is clicked by an user */
@@ -194,6 +199,9 @@ public class MainActivity extends AppCompatActivity {
 		View getPlayAgainButton = findViewById(R.id.play_again_button);
 		getPlayAgainButton.setVisibility(View.GONE);
 
+		View resultsContainer = findViewById(R.id.quiz_results_container);
+		resultsContainer.setVisibility(View.GONE);
+
 		// Clear checkbox again
 		clearCheckedBoxGroup(v, true);
 		// Set Scale type to app default
@@ -202,7 +210,8 @@ public class MainActivity extends AppCompatActivity {
 		// Set global variables to default
 		head = 0;
 		numberOfCorrectAnswers = 0;
-		trackAnswers = "";
+		cleanArray(userResponse);
+		cleanArray(answerToTenthQuestion);
 
 		// Present first question
 		startQuiz(v);
@@ -242,33 +251,46 @@ public class MainActivity extends AppCompatActivity {
 		// Check which checkbox was clicked
 		switch (v.getId()) {
 			case R.id.checkbox_option_1:
-				if (checked)
-					// Add i for incorrect answer to trackAnswers String
-					trackAnswers += "i";
+				if (checked) {
+					answerToTenthQuestion[0] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[0] = "";
+				}
 				break;
 			case R.id.checkbox_option_2:
-				if (checked)
-					// Add c for correct answer to trackAnswers String
-					trackAnswers += "c";
+				if (checked) {
+					answerToTenthQuestion[1] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[1] = "";
+				}
 				break;
 			case R.id.checkbox_option_3:
-				if (checked)
-					// Add i for incorrect answer to trackAnswers String
-					trackAnswers += "i";
+				if (checked) {
+					answerToTenthQuestion[2] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[2] = "";
+				}
 				break;
 			case R.id.checkbox_option_4:
-				if (checked)
-					// Add c for correct answer to trackAnswers String
-					trackAnswers += "c";
+				if (checked) {
+					answerToTenthQuestion[3] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[3] = "";
+				}
 				break;
 			case R.id.checkbox_option_5:
-				// Add c for correct answer to trackAnswers String
-				trackAnswers += "c";
+				if (checked) {
+					answerToTenthQuestion[4] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[4] = "";
+				}
 				break;
 			case R.id.checkbox_option_6:
-				if (checked)
-					// Add i for incorrect answer to trackAnswers String
-					trackAnswers += "i";
+				if (checked) {
+					answerToTenthQuestion[5] = ((CheckBox) v).getText().toString();
+				} else {
+					answerToTenthQuestion[5] = "";
+				}
 				break;
 		}
 	}
@@ -344,25 +366,28 @@ public class MainActivity extends AppCompatActivity {
 				return -1;
 			} else {
 				// Get user answer from checked RadioButton
-				String userResponse = checkedRadioButton.getText().toString();
+				userResponse[head] = checkedRadioButton.getText().toString();
 				// Compare user answer with answerKey
-				boolean isCorrect = userResponse.equals(answerKey[head]);
+				boolean isCorrect = userResponse[head].equals(answerKey[head]);
 				if (isCorrect) {
 					// Increment correct answers by 1
 					numberOfCorrectAnswers++;
 				}
+				saveResultToResults(userResponse[head], isCorrect);
 				return 0;
 			}
 		} else if (ninthQuestionInput.getVisibility() == View.VISIBLE) {
 			// EditText question type is displayed to user
-			String answerText = ninthQuestionInput.getText().toString().toLowerCase();
-			if (TextUtils.isEmpty(answerText)) {
+			userResponse[head] = ninthQuestionInput.getText().toString().toLowerCase();
+			if (TextUtils.isEmpty(userResponse[head])) {
 				displayToastForResult("Please enter text to proceed");
 				return -1;
 			}
-			if (answerText.equals(answerKey[head].toLowerCase())) {
+			boolean isCorrect = userResponse[head].equals(answerKey[head].toLowerCase());
+			if (isCorrect) {
 				numberOfCorrectAnswers++;
 			}
+			saveResultToResults(userResponse[head], isCorrect);
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			if (imm != null) {
 				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -372,13 +397,41 @@ public class MainActivity extends AppCompatActivity {
 			return 0;
 		} else {
 			// Multiple CheckBox question type is displayed to user
-			if (trackAnswers.isEmpty()) {
+			int numberOfChoicesUnchecked = 0;
+			for (String text : answerToTenthQuestion) {
+				if (TextUtils.isEmpty(text)) numberOfChoicesUnchecked++;
+			}
+			if (numberOfChoicesUnchecked == 6) {
 				displayToastForResult("Please check one or more of the options!");
 				return -1;
 			} else {
-				if (trackAnswers.equals("ccc")) {
-					numberOfCorrectAnswers++;
+				StringBuilder ansCode = new StringBuilder();
+				for (String userAnswer : answerToTenthQuestion) {
+					if (userAnswer != null && !userAnswer.equals("")) {
+						// Check only valid values in answer array
+						if (userAnswer.equals(getString(R.string.checkbox_2))) {
+							ansCode.append("c");
+						} else if (userAnswer.equals(getString(R.string.checkbox_4)))
+							ansCode.append("c");
+						else if (userAnswer.equals(getString(R.string.checkbox_5)))
+							ansCode.append("c");
+						else ansCode.append("i");
+					}
 				}
+
+				boolean isCorrectAnswer = ansCode.toString().equals("ccc");
+				if (isCorrectAnswer) numberOfCorrectAnswers++;
+
+				TextView answerTenthTextView = findViewById(R.id.answer_to_tenth_question);
+				StringBuilder multiLineText = new StringBuilder();
+				for (String checkBoxText : answerToTenthQuestion) {
+					if (!TextUtils.isEmpty(checkBoxText)) {
+						multiLineText.append(checkBoxText).append("\n");
+					}
+				}
+
+				answerTenthTextView.setText(multiLineText);
+				answerTenthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
 
 				// Clear checked boxes when finish is clicked
 				clearCheckedBoxGroup(view, true);
@@ -387,9 +440,65 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	private void saveResultToResults(String answerText, boolean isCorrectAnswer) {
+		switch (head) {
+			case 0:
+				TextView answerOneTextView = findViewById(R.id.answer_to_first_question);
+				answerOneTextView.setText(answerText);
+				answerOneTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 1:
+				TextView answerTwoTextView = findViewById(R.id.answer_to_second_question);
+				answerTwoTextView.setText(answerText);
+				answerTwoTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 2:
+				TextView answerThreeTextView = findViewById(R.id.answer_to_third_question);
+				answerThreeTextView.setText(answerText);
+				answerThreeTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 3:
+				TextView answerFourthTextView = findViewById(R.id.answer_to_fourth_question);
+				answerFourthTextView.setText(answerText);
+				answerFourthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 4:
+				TextView answerFifthTextView = findViewById(R.id.answer_to_fifth_question);
+				answerFifthTextView.setText(answerText);
+				answerFifthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 5:
+				TextView answerSixthTextView = findViewById(R.id.answer_to_sixth_question);
+				answerSixthTextView.setText(answerText);
+				answerSixthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 6:
+				TextView answerSeventhTextView = findViewById(R.id.answer_to_seventh_question);
+				answerSeventhTextView.setText(answerText);
+				answerSeventhTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 7:
+				TextView answerEighthTextView = findViewById(R.id.answer_to_eighth_question);
+				answerEighthTextView.setText(answerText);
+				answerEighthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			case 8:
+				TextView answerNinthTextView = findViewById(R.id.answer_to_ninth_question);
+				answerNinthTextView.setText(answerText);
+				answerNinthTextView.setTextColor(isCorrectAnswer ? Color.GREEN : Color.RED);
+				break;
+			default:
+				Log.e("MainActivity", "INVALID: Exceeds the number of questions");
+				break;
+		}
+	}
+
 	private void showSummary(View view) {
 		// Hide submit
-		submitButton.setVisibility(View.INVISIBLE);
+		submitButton.setVisibility(View.GONE);
+
+		Button quizResultsButton = findViewById(R.id.show_quiz_results);
+		quizResultsButton.setVisibility(View.VISIBLE);
 
 		// Set summary image view
 		hintImageForQuestion.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -426,5 +535,25 @@ public class MainActivity extends AppCompatActivity {
 		// Set play again button view
 		View getPlayAgainButton = findViewById(R.id.play_again_button);
 		getPlayAgainButton.setVisibility(View.VISIBLE);
+	}
+
+	public void showQuizResults(View view) {
+		Button quizResultsButton = findViewById(R.id.show_quiz_results);
+		quizResultsButton.setVisibility(View.GONE);
+
+		hintImageForQuestion.setVisibility(View.GONE);
+
+		TextView resultTextView = findViewById(R.id.question_text_view);
+		resultTextView.setVisibility(View.GONE);
+
+		View resultsContainer = findViewById(R.id.quiz_results_container);
+		resultsContainer.setVisibility(View.VISIBLE);
+
+	}
+
+	private void cleanArray(String[] array) {
+		for (int i = 0; i < array.length; i++) {
+			array[i] = null;
+		}
 	}
 }
