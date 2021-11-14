@@ -22,7 +22,7 @@
 
     <style name="ButtonText" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="textAllCaps">true</item>
         <item name="android:typeface">sans</item>
     </style>
 
