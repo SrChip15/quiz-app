@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 		hintImageForQuestion.setImageResource(R.drawable.question_one_hint_image);
 		hintImageForQuestion.setVisibility(View.VISIBLE);
 
-		// Make question TextView visible and Set first question
+		// Display first question
 		questionText.setText(R.string.question_1);
 		questionText.setGravity(Gravity.NO_GRAVITY);
 		questionText.setVisibility(View.VISIBLE);
