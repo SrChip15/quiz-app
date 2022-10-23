@@ -1,5 +1,6 @@
 package com.example.android.quizapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -19,6 +20,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 			"Accio"
 	};
 
-	private String[] userResponse = new String[9]; // ten answers incl multiple check box answer
+	private final String[] userResponse = new String[9]; // ten answers incl multiple check box answer
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -244,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
 	 * This method is called to track the CheckBox options that an user has checked as answers to
 	 * the multiple CheckBox question type
 	 */
+	@SuppressLint("NonConstantResourceId")
 	public void onCheckboxClicked(View v) {
 		// Is the view now checked?
 		boolean checked = ((CheckBox) v).isChecked();
@@ -552,8 +556,6 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void cleanArray(String[] array) {
-		for (int i = 0; i < array.length; i++) {
-			array[i] = null;
-		}
+		Arrays.fill(array, null);
 	}
 }
