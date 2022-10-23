@@ -1,5 +1,6 @@
 package com.example.android.quizapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -20,9 +21,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
-	/** Class instance variables for storing and grading the answers to the quiz questions */
+	// Class instance variables for storing and grading the answers to the quiz questions
 	private int head;
 	private int numberOfCorrectAnswers;
 	private ImageView hintImageForQuestion;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 			"Accio"
 	};
 
-	private String[] userResponse = new String[9]; // ten answers incl multiple check box answer
+	private final String[] userResponse = new String[9]; // ten answers incl multiple check box answer
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
 		answerToTenthQuestion = new String[6];
 	}
 
-	/** This method is called when the start quiz button is clicked by an user */
+	/**
+	 * This method is called when the start quiz button is clicked by an user
+	 * @param v current view
+	 */
 	public void startQuiz(View v) {
 		// Remove banner image
 		View bannerImageView = findViewById(R.id.banner_image);
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called when an user clicks the next button
 	 * The button itself shows up only after the submit button is clicked
+	 * @param v current view
 	 */
 	public void presentNextQuestion(View v) {
 		Resources res = getResources();
@@ -185,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called when an user clicks the submit button to
 	 * submits his/her answer to a question
+	 * @param v current view
 	 */
 	public void submitAndNext(View v) {
 		if (evaluateAnswer(v) == -1) return;
@@ -193,7 +201,10 @@ public class MainActivity extends AppCompatActivity {
 		if (head == 10) showSummary(v);
 	}
 
-	/** This method is called when an user wants to play again */
+	/**
+	 * This method is called when an user wants to play again
+	 * @param v current view
+	 */
 	public void onPlayAgainClick(View v) {
 		// Remove play again button
 		View getPlayAgainButton = findViewById(R.id.play_again_button);
@@ -220,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called when a multiple-choice question is presented to an user
 	 *
-	 * @param choices a String array that holds the multiple choices for a question
+	 * @param choices array that holds the multiple choices for a question
 	 */
 	private void setRadioButtonText(String[] choices) {
 		// Set multiple choices
@@ -232,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called when a toast has to be displayed to an user
 	 *
-	 * @param displayMessage a String that sets the text for a toast view
+	 * @param displayMessage text message for a toast view
 	 */
 	private void displayToastForResult(String displayMessage) {
 		Toast eval = Toast.makeText(this, displayMessage, Toast.LENGTH_SHORT);
@@ -243,7 +254,9 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called to track the CheckBox options that an user has checked as answers to
 	 * the multiple CheckBox question type
+	 * @param v current view
 	 */
+	@SuppressLint("NonConstantResourceId")
 	public void onCheckboxClicked(View v) {
 		// Is the view now checked?
 		boolean checked = ((CheckBox) v).isChecked();
@@ -298,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * This method is called to make the entire CheckBox cluster visible
 	 *
-	 * @param makeVisible a boolean that indicates whether or not the CheckBox is to be made visible
+	 * @param makeVisible boolean that indicates whether or not the CheckBox is to be made visible
 	 */
 	@SuppressWarnings("unused")
 	private void isCheckboxVisible(View v, boolean makeVisible) {
@@ -353,6 +366,11 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Evaluate answers based on the type of question
+	 * @param view current view
+	 * @return 0 for successful evaluation and -1 for unsuccessful evaluation
+	 */
 	private int evaluateAnswer(View view) {
 		// Check question type to appropriately evaluate answer
 		if (answerChoicesGroup.getVisibility() == View.VISIBLE) {
@@ -440,6 +458,11 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Aggregate evaluation results
+	 * @param answerText text from chosen checkbox or radiobutton
+	 * @param isCorrectAnswer boolean indicating if answer is correct or not
+	 */
 	private void saveResultToResults(String answerText, boolean isCorrectAnswer) {
 		switch (head) {
 			case 0:
@@ -493,6 +516,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Display test performance summary
+	 * @param view current view
+	 */
 	private void showSummary(View view) {
 		// Hide submit
 		submitButton.setVisibility(View.GONE);
@@ -537,6 +564,11 @@ public class MainActivity extends AppCompatActivity {
 		getPlayAgainButton.setVisibility(View.VISIBLE);
 	}
 
+	/**
+	 * Display quiz results with both the question and supplied answer
+	 * Incorrect answer text is red in colour
+	 * @param view current view
+	 */
 	public void showQuizResults(View view) {
 		Button quizResultsButton = findViewById(R.id.show_quiz_results);
 		quizResultsButton.setVisibility(View.GONE);
@@ -551,9 +583,11 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * Clear answer objects from previous state
+	 * @param array answer object
+	 */
 	private void cleanArray(String[] array) {
-		for (int i = 0; i < array.length; i++) {
-			array[i] = null;
-		}
+		Arrays.fill(array, null);
 	}
 }
