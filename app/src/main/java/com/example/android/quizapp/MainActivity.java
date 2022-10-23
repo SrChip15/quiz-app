@@ -69,17 +69,7 @@ public class MainActivity extends AppCompatActivity {
 	 * @param v current view
 	 */
 	public void startQuiz(View v) {
-		// Remove banner image
-		View bannerImageView = findViewById(R.id.banner_image);
-		bannerImageView.setVisibility(View.GONE);
-
-		// Remove banner text
-		View bannerTextView = findViewById(R.id.banner_text);
-		bannerTextView.setVisibility(View.GONE);
-
-		// Remove start quiz button
-		View startQuizButton = findViewById(R.id.start_button);
-		startQuizButton.setVisibility(View.GONE);
+		hideInitialScreen();
 
 		// Set scroll view
 		View scrollView = findViewById(R.id.scroll_view);
@@ -103,6 +93,23 @@ public class MainActivity extends AppCompatActivity {
 		// Set submit button
 		submitButton.setText(R.string.submit);
 		submitButton.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Hides the initial screen
+	 */
+	private void hideInitialScreen() {
+		// Remove banner image
+		View bannerImageView = findViewById(R.id.banner_image);
+		bannerImageView.setVisibility(View.GONE);
+
+		// Remove banner text
+		View bannerTextView = findViewById(R.id.banner_text);
+		bannerTextView.setVisibility(View.GONE);
+
+		// Remove start quiz button
+		View startQuizButton = findViewById(R.id.start_button);
+		startQuizButton.setVisibility(View.GONE);
 	}
 
 	/**
