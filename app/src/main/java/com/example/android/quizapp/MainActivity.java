@@ -69,17 +69,7 @@ public class MainActivity extends AppCompatActivity {
 	 * @param v current view
 	 */
 	public void startQuiz(View v) {
-		// Remove banner image
-		View bannerImageView = findViewById(R.id.banner_image);
-		bannerImageView.setVisibility(View.GONE);
-
-		// Remove banner text
-		View bannerTextView = findViewById(R.id.banner_text);
-		bannerTextView.setVisibility(View.GONE);
-
-		// Remove start quiz button
-		View startQuizButton = findViewById(R.id.start_button);
-		startQuizButton.setVisibility(View.GONE);
+		hideInitialScreen();
 
 		// Set scroll view
 		View scrollView = findViewById(R.id.scroll_view);
@@ -89,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 		hintImageForQuestion.setImageResource(R.drawable.question_one_hint_image);
 		hintImageForQuestion.setVisibility(View.VISIBLE);
 
-		// Make question TextView visible and Set first question
+		// Display first question
 		questionText.setText(R.string.question_1);
 		questionText.setGravity(Gravity.NO_GRAVITY);
 		questionText.setVisibility(View.VISIBLE);
@@ -103,6 +93,23 @@ public class MainActivity extends AppCompatActivity {
 		// Set submit button
 		submitButton.setText(R.string.submit);
 		submitButton.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Hides the initial screen
+	 */
+	private void hideInitialScreen() {
+		// Remove banner image
+		View bannerImageView = findViewById(R.id.banner_image);
+		bannerImageView.setVisibility(View.GONE);
+
+		// Remove banner text
+		View bannerTextView = findViewById(R.id.banner_text);
+		bannerTextView.setVisibility(View.GONE);
+
+		// Remove start quiz button
+		View startQuizButton = findViewById(R.id.start_button);
+		startQuizButton.setVisibility(View.GONE);
 	}
 
 	/**
